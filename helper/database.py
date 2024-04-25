@@ -20,15 +20,6 @@ class Database:
             metadata_code=""" -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Animes_VQ" -metadata author="@Yuuichi_Sama" -metadata:s:s title="Subtitled By :- @Animes_VQ" -metadata:s:a title="By :- @Animes_VQ" -metadata:s:v title="By:- @Animes_VQ" """
         )
 
-
-    def new_user(self, id):
-        return dict(
-            _id=int(id),                                   
-            file_id=None,
-            caption=None,
-            format_template=None  # Add this line for the format template
-        )
-
     async def add_user(self, b, m):
         u = m.from_user
         if not await self.is_user_exist(u.id):
@@ -78,7 +69,8 @@ class Database:
     async def get_media_preference(self, id):
         user = await self.col.find_one({'_id': int(id)})
         return user.get('media_type', None)
-            async def set_metadata(self, id, bool_meta):
+
+    async def set_metadata(self, id, bool_meta):
         await self.col.update_one({'_id': int(id)}, {'$set': {'metadata': bool_meta}})
 
     async def get_metadata(self, id):
@@ -94,10 +86,3 @@ class Database:
 
 
 madflixbotz = Database(Config.DB_URL, Config.DB_NAME)
-        
-
-
-# Jishu Developer 
-# Don't Remove Credit 🥺
-# Telegram Channel @Madflix_Bots
-# Developer @JishuDeveloper
